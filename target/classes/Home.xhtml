@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Insert title here</title>
+</h:head>
+
+
+<h:body>
+	<h:form>
+	
+		<h:commandLink value="Informações adicionais" action="#{produtoBean.obterAjuda()}">
+			<f:actionListener binding="#{registroCliqueBotaoListener}"/>
+		</h:commandLink>
+		<br/><br/>
+		
+		Nome:
+		<h:inputText value="#{produtoBean.produto.nome}"/>
+		<br/>
+		Fabricante:
+		<h:inputText value="#{produtoBean.produto.fabricante}"/>
+		<br/>
+		Categoria:
+		<h:inputText value="#{produtoBean.produto.categoria}"/>
+		
+		<h:commandButton value="Enviar" action="#{produtoBean.incluir()}">
+			<f:actionListener binding="#{registroCliqueBotaoListener}"/>
+		</h:commandButton>
+		
+		<p:dataTable var="p" value="#{produtoBean.listaProduto}" style="margin-top:10px;" emptyMessage="Nenhuma pessoa encontrada"
+		rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+	
+    	<p:column headerText="Nome">
+        	<h:outputText value="#{p.nome}"/>
+    	</p:column>
+ 
+    	<p:column headerText="Fabricante">
+        	<h:outputText value="#{p.fabricante}" />
+    	</p:column>
+ 
+    	<p:column headerText="Categoria">
+        	<h:outputText value="#{p.categoria}" />
+    	</p:column>
+    	
+    	<p:column headerText="">
+        	<h:commandButton value="#{produtoBean.excluir()}">
+        		<f:setPropertyActionListener value="#{p}" target="#{produtoBean.produtoSelecionado}"/>
+        	</h:commandButton>
+    	</p:column>
+ 
+	</p:dataTable>
+	</h:form>
+</h:body>
+</html>
